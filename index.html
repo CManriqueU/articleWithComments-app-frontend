@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article with Comments</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        article {
+            margin-bottom: 40px;
+        }
+
+        article h1 {
+            font-size: 30px;
+            color: #333;
+            text-align: center;
+        }
+
+        article p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        #comments-section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .comment {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        #add-comment-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #add-comment-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            article h1 {
+                font-size: 40px;
+                text-align: center;
+            }
+
+            #comments-section h2 {
+                font-size: 18px;
+            }
+        }
+
+        /* ... [rest of the styles] */
+
+        .comment {
+            position: relative;
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .comment-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .comment-button.delete {
+            right: 35px;
+        }
+        
+        /* ... [rest of the styles] */
+
+        .comment-button {
+            position: absolute;
+            top: 10px;
+            border: none;
+            background-color: transparent;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .comment-button.delete {
+            right: 50px; /* Adjust as needed */
+        }
+
+        .comment-button.update {
+            right: 10px;
+        }
+
+        /* ... [existing styles] */
+
+        #comment-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        #post-comment-btn {
+            background-color: #4267B2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #post-comment-btn:hover {
+            background-color: #365899;
+        }
+
+        /* ... [existing styles] */
+
+        .comment-button {
+            display: none;
+            /* ... [rest of the styles for comment-button] */
+        }
+
+        .comment:hover .comment-button {
+            display: inline;
+        }
+
+        /* h1{
+            font-size: 30px;
+        } */
+
+        textarea {
+            box-sizing: border-box; 
+            width: 100%; 
+            max-width: 100%; 
+            margin: 0; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+        }
+
+    </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- ... [article content] -->
+        <article id="article">
+            <h1>A Night In Tokyo and New York</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis architecto harum iure voluptatem quo vero iusto accusantium 
+                consequuntur nemo repellendus officia neque quibusdam officiis omnis sequi quidem modi aspernatur dolorum amet consequatur enim, 
+                odio unde pariatur reiciendis. Animi deserunt molestias quos temporibus repudiandae, ex laboriosam ullam, nam laudantium consequatur 
+                quae iusto sapiente blanditiis debitis nulla facilis in ipsa provident incidunt?</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus, quidem repellat, accusantium illum animi beatae quod consequatur 
+                culpa, dolore laborum quam asperiores aspernatur odio pariatur architecto ea fugit dolorum exercitationem quas. Ex est dolor reprehenderit 
+                neque sapiente, non, obcaecati velit vitae molestiae autem vero aut.</p>
+
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia voluptas inventore mollitia fugit velit commodi corrupti unde, 
+                deserunt atque vitae, quibusdam voluptates quasi error quae provident sunt delectus quos. Incidunt iure odio veritatis non facilis,
+                earum maiores est asperiores fuga magni, quaerat dolorem quidem dolore eaque eos tenetur sequi harum mollitia, suscipit hic 
+                accusamus ipsa.</p>
+            <!-- <button>Button <i class='fas fa-pencil-alt'></i></button> -->
+        </article>
+        <div id="comments-section">
+            <h2>Comments</h2>
+            <div id="comments"></div>
+            <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+            <button id="post-comment-btn">Post</button>
+        </div>
+    </div>
+
+    <script>
+        // Event listener for the 'Post' button
+        document.getElementById('post-comment-btn').addEventListener('click', function() {
+            const commentText = document.getElementById('comment-input').value;
+            if (commentText) {
+                addComment(commentText);
+                document.getElementById('comment-input').value = ''; // Clear the input field after posting
+            }
+        });
+
+        // Function to add a comment
+        function addComment(commentText) {
+            const commentContainer = document.createElement('div');
+            commentContainer.classList.add('comment');
+            commentContainer.textContent = commentText;
+
+            // Set the container to display flex
+            commentContainer.style.display = 'flex';
+            commentContainer.style.alignItems = 'center';
+            commentContainer.style.justifyContent = 'space-between';
+
+            // Create delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.style.display = 'inline-block'; // or 'block' if within a flex container
+            deleteBtn.style.marginRight = '14px';
+            deleteBtn.classList.add('comment-button', 'delete');
+            deleteBtn.innerHTML = "<i class='fas fa-trash-alt'></i> Delete"; // Assuming you're using Font Awesome
+            deleteBtn.onclick = function() {
+                commentContainer.remove();
+            };
+
+            // Create update button
+            const updateBtn = document.createElement('button');
+            updateBtn.style.display = 'inline-block'; 
+            updateBtn.classList.add('comment-button', 'update');
+            updateBtn.innerHTML = "<i class='fas fa-edit'></i> Update"; // Adjust if using icons
+
+            // Add buttons to the container
+            commentContainer.appendChild(deleteBtn);
+            commentContainer.appendChild(updateBtn);
+
+            // Append the container to comments
+            document.getElementById('comments').appendChild(commentContainer);
+        }
+
+
+    </script>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
